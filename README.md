@@ -2,7 +2,7 @@
 ------------------------
 
 ![IFA]
-(/public/logoIFA.png)
+(/fisher/public/logoIFA.png)
 
 *International Fishing Association* ordered a site where the sportsmen can log and document their catches.
 
