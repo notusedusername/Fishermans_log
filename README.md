@@ -1,8 +1,7 @@
 ## Fisherman’s Log
 ------------------------
 
-![IFA]
-(/fisher/public/logoIFA.png)
+![IFA](/fisher/public/logoIFA.png)
 
 *International Fishing Association* ordered a site where the sportsmen can log and document their catches.
 
