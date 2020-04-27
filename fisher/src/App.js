@@ -1,24 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Route, Switch} from "react-router";
+import {BrowserRouter} from "react-router-dom";
+import Menu from "./components/Menu";
+import './App.scss';
+import CatchForm from "./components/CatchForm";
+import Welcome from "./components/Welcome";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+          <Menu/>
+          <Switch>
+              <Route exact={true} component={Welcome} path={"/"}/>
+              <Route exact={true} component={CatchForm} path={"/catch"}/>
+          </Switch>
+      </BrowserRouter>
     </div>
   );
 }
