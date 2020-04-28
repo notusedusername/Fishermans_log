@@ -1,5 +1,6 @@
 import React from "react";
 import {Navbar, NavDropdown, Nav} from "react-bootstrap";
+import MenuRight from "./MenuRight";
 
 class Menu extends React.Component {
 
@@ -12,14 +13,9 @@ class Menu extends React.Component {
                         <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link href="/catch">Record Catch</Nav.Link>
                         <Nav.Link href="/catches">List Catches</Nav.Link>
-                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                        </NavDropdown>
+
                     </Nav>
+                    <MenuRight/>
                 </Navbar.Collapse>
             </Navbar>
         );

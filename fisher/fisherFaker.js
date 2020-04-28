@@ -74,12 +74,15 @@ for(let i = 1; i < 400; i ++){
     fisherEquipment.push(generateFisherEquipment(i));
 }
 
+var user = {id: ''};
+
 fs.writeFile('database.fake.json',
     JSON.stringify({
         fishermans: fishermans,
         locations: locations,
         catches: catches,
         fisher_equipment: fisherEquipment,
-        equipment: equipment
+        equipment: equipment,
+        user: user
     }), (err) => {});
 
