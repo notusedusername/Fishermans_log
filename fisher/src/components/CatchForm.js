@@ -1,10 +1,7 @@
 import React from "react";
 import CatchActions from "../actions/CatchActions";
+import LocationActions from "../actions/LocationActions";
 import LocationSelect from "./LocationSelect";
-import catchDispatcher from "../dispatchers/CatchDispatcher";
-import locations from "./Locations";
-
-const axios = require('axios');
 
 
 class CatchForm extends React.Component {
@@ -20,7 +17,7 @@ class CatchForm extends React.Component {
     }
 
     componentDidMount() {
-        CatchActions.getLocations();
+        LocationActions.getLocations();
     }
 
     render() {
@@ -57,33 +54,3 @@ class CatchForm extends React.Component {
 
 export default CatchForm;
 
-catchDispatcher.register((action) => {
-    console.log(action.command.commandType);
-    if(action.command.commandType === 'GET_LOC_LIST'){
-       axios.get('http://localhost:3001/locations')
-           .then((res) => {
-               Object.assign(locations, res.data.map(entry => {return {value: entry.id, label: entry.name }}));
-                console.log(res.data);
-           })
-           .catch((err) => {
-               console.log(err);
-           });
-   }
-   else if(action.command.commandType === 'POST_CATCH'){
-       let item = action.command.item;
-       axios.post('http://localhost:3001/catches', {
-            fisherman: item.fisherman,
-            location: item.location,
-            timestamp: Date.now(),
-            weight: item.weight,
-            species: item.species
-        })
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-   }
-
-});

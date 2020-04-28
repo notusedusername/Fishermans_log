@@ -1,6 +1,6 @@
 import {Dispatcher} from "flux";
 
-class CatchDispatcher extends Dispatcher{
+class AppDispatcher extends Dispatcher{
     handleViewAction(command){
         this.dispatch({
             actionType: 'VIEW_ACTION',
@@ -9,5 +9,5 @@ class CatchDispatcher extends Dispatcher{
     }
 }
 
-const catchDispatcher = new CatchDispatcher();
-export default catchDispatcher;
+const dispatcher = new AppDispatcher();
+export default dispatcher;

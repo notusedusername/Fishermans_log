@@ -1,16 +1,17 @@
-import catchDispatcher from "../dispatchers/CatchDispatcher";
+import dispatcher from "../dispatchers/Dispatcher";
 
 class CatchActions {
-    getLocations(){
-        catchDispatcher.handleViewAction({
-            commandType: 'GET_LOC_LIST'
-        });
-    }
-
     postCatch(item){
-        catchDispatcher.handleViewAction({
+        dispatcher.handleViewAction({
             commandType: "POST_CATCH",
             item: item
+        })
+    }
+
+    getCatch(params){
+        dispatcher.handleViewAction({
+            commandType: "GET_CATCH",
+            params: params
         })
     }
 }
