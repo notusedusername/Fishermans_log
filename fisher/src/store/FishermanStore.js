@@ -3,7 +3,7 @@ import dispatcher from "../dispatchers/Dispatcher";
 
 
 class FishermanStore extends EventEmitter{
-    _fishermans = [];
+    _fishermen = [];
 
     emitChange(){
         this.emit('change')

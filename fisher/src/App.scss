@@ -46,11 +46,13 @@ body {
 
 #catches {
   margin: 2em;
+  table {
+    margin-top: 1em;
+    text-align: center;
+  }
 }
 
-#catches table {
-  margin-top: 1em;
-}
+
 
 .card {
   width: 50%;
@@ -80,3 +82,16 @@ h3{
   padding-top: 1em;
 }
 
+#filter{
+  width: 60%;
+  padding: 1em;
+   margin: auto;
+  >div{
+    margin: 1em;
+  }
+  button{
+
+    margin-left: 1em;
+    width: calc(100% - 2em);
+  }
+}

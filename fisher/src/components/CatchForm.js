@@ -3,6 +3,7 @@ import CatchActions from "../actions/CatchActions";
 import LocationActions from "../actions/LocationActions";
 import LocationSelect from "./LocationSelect";
 import locationStore from "../store/Locations";
+import constants from "../Constants";
 
 
 class CatchForm extends React.Component {
@@ -10,7 +11,7 @@ class CatchForm extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state={
-            fisherman: 1,
+            fisherman: constants.default_demo_profile_id,
             location : 1,
             species : '',
             weight : ''
@@ -33,7 +34,7 @@ class CatchForm extends React.Component {
                </div>
                <div className="form-group">
                    <label htmlFor="species">Species</label>
-                   <input type="text"  value={this.state.species}  className="form-control" id="species"
+                   <input required type="text"  value={this.state.species}  className="form-control" id="species"
                           placeholder="Species of the fish"
                           onChange={(e)=>{
                               this.setState({species : e.target.value});
@@ -41,13 +42,13 @@ class CatchForm extends React.Component {
                </div>
                <div className="form-group">
                    <label htmlFor="weight">Weight</label>
-                   <input type="number" value={this.state.weight} className="form-control" id="weight"
+                   <input required type="number" value={this.state.weight} className="form-control" id="weight"
                           placeholder="Weight of the fish"
                           onChange={(e)=>{
                               this.setState({weight : e.target.value});
                           }}/>
                </div>
-               <button type="submit" className="btn btn-primary" onClick={() => CatchActions.postCatch(this.state)}>Submit</button>
+               <button style={{width: "100%"}} type="submit" className="btn btn-outline-primary" onClick={() => CatchActions.postCatch(this.state)}>Submit</button>
            </form>
        );
     }

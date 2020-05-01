@@ -24,7 +24,6 @@ class CatchStore extends EventEmitter{
 
 
 dispatcher.register((action) => {
-
     if(action.command.commandType === 'POST_CATCH'){
         let item = action.command.item;
         axios.post('http://localhost:3001/catches', {
@@ -45,12 +44,13 @@ dispatcher.register((action) => {
     }
     else if(action.command.commandType === 'GET_CATCH'){
         let params = action.command.params;
+        console.log(params);
         axios.get('http://localhost:3001/catches' + queryParams(params))
             .then((res) => {
                 console.log(res.data);
                 var result = [];
                 res.data.forEach((value, index) => {
-                   var fisherman = fishermanStore._fishermans.filter((item) => item.id === value.fisherman);
+                   var fisherman = fishermanStore._fishermen.filter((item) => item.id === value.fisherman);
                    var location = locationStore._locations.filter((item) => item.id === value.location);
                    result.push({
                        id: value.id,
@@ -58,7 +58,7 @@ dispatcher.register((action) => {
                        location: location[0],
                        timestamp: value.timestamp.replace('T', ' ').substring(0, value.timestamp.length - 8),
                        weight: value.weight,
-                       species: value.weight
+                       species: value.species
                    })
                 });
                 console.log(result);
@@ -79,11 +79,12 @@ export default catchStore;
 
 var queryParams = (params) => {
     if(params){
-        var fisherman = params.id ? 'fisherman=' + params.id : '';
-        var location = params.location ? 'location=' + params.location : '';
-        var weight = params.weight ? 'weight=' + params.weight : '';
-        var species = params.species ? 'species=' + params.species : '';
+        var fisherman = params.fisherman ? 'fisherman=' + params.fisherman + '&' : '';
+        var location = params.location ? ('location=' + params.location + '&') : '';
+        var weight = params.weight ? 'weight=' + params.weight + '&' : '';
+        var species = params.species ? 'species=' + params.species + '&' : '';
         var toReturn = fisherman + location + weight + species;
+        toReturn = toReturn.length > 1 && toReturn.charAt(toReturn.length -1) === '&' ? toReturn.substring(0, toReturn.length - 1) : toReturn;
         return toReturn ? '?' + toReturn : '';
     }
     else {

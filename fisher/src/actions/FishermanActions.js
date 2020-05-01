@@ -17,7 +17,7 @@ dispatcher.register((action) => {
         axios.get('http://localhost:3001/fishermans')
             .then((res) => {
                 console.log(res.data);
-                fishermanStore._fishermans = res.data;
+                fishermanStore._fishermen = res.data;
                 fishermanStore.emitChange();
 
             })

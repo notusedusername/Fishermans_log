@@ -1,21 +1,21 @@
 import React from "react";
-import {Button, Form, FormControl} from "react-bootstrap";
+import LocationSelect from "./LocationSelect";
+import FishermanSelect from "./FishermanSelect";
+import CatchActions from "../actions/CatchActions";
+import filter from "../store/RageAgainstReact";
 
 class Filter extends React.Component {
 
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-            filter: ''
-        }
-    }
+
 
     render() {
         return (
-            <Form inline>
-                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                <Button variant="outline-success">Search</Button>
-            </Form>
+            <form id = "filter">
+                <LocationSelect />
+                <FishermanSelect />
+                <button className="btn btn-outline-success" onClick={(e) => {e.preventDefault(); CatchActions.getCatch(filter)}}>Search</button>
+            </form>
+
         );
     }
 }
