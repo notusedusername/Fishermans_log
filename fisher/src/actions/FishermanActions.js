@@ -14,7 +14,7 @@ export default new FishermanActions();
 
 dispatcher.register((action) => {
     if(action.command.commandType === 'GET_ALL_FISHER'){
-        axios.get('http://localhost:3001/fishermans')
+        axios.get('http://localhost:3001/fishermen')
             .then((res) => {
                 console.log(res.data);
                 fishermanStore._fishermen = res.data;

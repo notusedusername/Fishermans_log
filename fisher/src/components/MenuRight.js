@@ -3,6 +3,7 @@ import {Nav, NavDropdown} from "react-bootstrap";
 import ProfileActions from "../actions/ProfileActions";
 import profile from "../store/ProfileStore";
 import constants from "../Constants";
+import filter from "../store/RageAgainstReact";
 
 class MenuRight extends React.Component{
     constructor(props, context) {
@@ -36,7 +37,7 @@ class MenuRight extends React.Component{
                 <Nav>
                     <NavDropdown alignRight title={`${this.state.profile.firstName} ${this.state.profile.lastName}`} id="basic-nav-dropdown" >
                         <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-                        <NavDropdown.Item href={"/"}>My catches</NavDropdown.Item>
+                        <NavDropdown.Item href={"/MyCatches"}>My catches</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
             );

@@ -2,7 +2,6 @@ import React from "react";
 import CatchActions from "../actions/CatchActions";
 import LocationActions from "../actions/LocationActions";
 import LocationSelect from "./LocationSelect";
-import locationStore from "../store/Locations";
 import constants from "../Constants";
 
 

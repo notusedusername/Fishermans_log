@@ -7,7 +7,8 @@ import CatchForm from "./components/CatchForm";
 import CatchList from "./components/CatchList";
 import Welcome from "./components/Welcome";
 import Profile from "./components/Profile";
-
+import MyCatches from "./components/MyCatches";
+import NotFound from "./components/NotFound";
 function App() {
   return (
     <div className="App">
@@ -20,6 +21,8 @@ function App() {
                       <Route exact={true} component={CatchForm} path={"/catch"}/>
                       <Route exact={true} component={CatchList} path={"/catches"}/>
                       <Route exact={true} component={Profile} path={"/profile"}/>
+                      <Route exact={true} component={MyCatches} path={"/MyCatches"}/>
+                      <Route exact={false} component={NotFound}/>
                   </Switch>
               </div>
           </BrowserRouter>

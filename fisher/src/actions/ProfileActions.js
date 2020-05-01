@@ -53,9 +53,9 @@ dispatcher.register((action) => {
 });
 
 var getPersonalData = (id) => {
-    axios.get('http://localhost:3001/fishermans?id=' + getFishermanIdOrDefault(id))
+    axios.get('http://localhost:3001/fishermen?id=' + getFishermanIdOrDefault(id))
         .then((res) => {
-            console.log("http://localhost:3001/fishermans?id=" + getFishermanIdOrDefault(id));
+            console.log("http://localhost:3001/fishermen?id=" + getFishermanIdOrDefault(id));
             console.log(res.data[0]);
             profile._profile = res.data[0];
             profile.emitChange();

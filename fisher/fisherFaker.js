@@ -14,12 +14,12 @@ generateFisherman = (id) => {
   }
 };
 
-var fishermans = [];
+var fishermen = [];
 for(let i = 1; i <= 100; i++){
-    fishermans.push(generateFisherman(i));
+    fishermen.push(generateFisherman(i));
 }
 
-fishermans.push({id: 666, firstName: "Demo", lastName: "János", country: "Magyarország", city: "Bivalybasznád", address: "Csülök utca 31", email: "xXPussyDestroyerXx@freemail.com", telephone: "0640505050"});
+fishermen.push({id: 666, firstName: "Demo", lastName: "János", country: "Magyarország", city: "Bivalybasznád", address: "Csülök utca 31", email: "xXPussyDestroyerXx@freemail.com", telephone: "0640505050"});
 
 generateLocation = (id) => {
     locationTypes = ['Lake', 'River', 'Sea'];
@@ -38,7 +38,7 @@ for(let i = 1; i <= 200; i++){
 generateCatch = (id) => {
     return {
         id: id,
-        fisherman: faker.random.arrayElement(fishermans).id,
+        fisherman: faker.random.arrayElement(fishermen).id,
         location: faker.random.arrayElement(locations).id,
         timestamp: faker.date.recent(),
         weight: faker.random.number(),
@@ -64,7 +64,7 @@ var equipment = [
 generateFisherEquipment = (id) => {
   return {
       id: id,
-      fisherman: faker.random.arrayElement(fishermans).id,
+      fisherman: faker.random.arrayElement(fishermen).id,
       equipment: faker.random.arrayElement(equipment).id,
       additional_description: faker.lorem.paragraph()
   }
@@ -78,7 +78,7 @@ for(let i = 1; i < 400; i ++){
 
 fs.writeFile('database.fake.json',
     JSON.stringify({
-        fishermans: fishermans,
+        fishermen: fishermen,
         locations: locations,
         catches: catches,
         fisher_equipment: fisherEquipment,
