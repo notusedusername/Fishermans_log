@@ -34,7 +34,7 @@ class EquipmentItem extends React.Component {
         return (
             equipment.map((item) => {
                 return (
-                    <Accordion>
+                    <Accordion defaultActiveKey={"-1"}>
                     <Card>
                         <Card.Header>
                             {item.name}<br/>

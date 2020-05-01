@@ -19,9 +19,8 @@ for(let i = 1; i <= 100; i++){
     fishermen.push(generateFisherman(i));
 }
 
-fishermen.push({id: 666, firstName: "Demo", lastName: "János", country: "Magyarország", city: "Bivalybasznád", address: "Csülök utca 31", email: "xXPussyDestroyerXx@freemail.com", telephone: "0640505050"});
-
 generateLocation = (id) => {
+
     locationTypes = ['Lake', 'River', 'Sea'];
     var locName = faker.lorem.word();
     return {
@@ -34,8 +33,8 @@ var locations = [];
 for(let i = 1; i <= 200; i++){
     locations.push(generateLocation(i));
 }
-
 generateCatch = (id) => {
+
     return {
         id: id,
         fisherman: faker.random.arrayElement(fishermen).id,
@@ -45,12 +44,11 @@ generateCatch = (id) => {
         species: faker.lorem.words(2)
     }
 };
-
 var catches = [];
+
 for(let i = 1; i <= 50; i++){
     catches.push(generateCatch(i));
 }
-
 var equipment = [
     {id: 1, name: "Very OP Fishing Pole", description: faker.lorem.paragraph()},
     {id: 2, name: "Not so OP but still very noice Pole", description: faker.lorem.paragraph()},
@@ -60,20 +58,31 @@ var equipment = [
     {id: 6, name: "Worms", description: "Armageddon"},
 ];
 
-
 generateFisherEquipment = (id) => {
-  return {
+
+
+    return {
       id: id,
       fisherman: faker.random.arrayElement(fishermen).id,
       equipment: faker.random.arrayElement(equipment).id,
       additional_description: faker.lorem.paragraph()
   }
 };
-
 var fisherEquipment = [];
+
 for(let i = 1; i < 400; i ++){
     fisherEquipment.push(generateFisherEquipment(i));
 }
+fishermen.push({id: 666, firstName: "Demo", lastName: "János", country: "Magyarország", city: "Bivalybasznád", address: "Csülök utca 31", email: "xXPussyDestroyerXx@freemail.com", telephone: "0640505050"});
+equipment.forEach(value => {
+    fisherEquipment.push({
+            id: 400+value.id,
+            fisherman: 666,
+            equipment: value.id,
+            additional_description: "My mema bouht me"
+        }
+    )
+});
 
 
 fs.writeFile('database.fake.json',
@@ -84,4 +93,3 @@ fs.writeFile('database.fake.json',
         fisher_equipment: fisherEquipment,
         equipment: equipment
     }), (err) => {});
-
