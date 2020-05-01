@@ -2,6 +2,8 @@ import React from "react";
 import CatchActions from "../actions/CatchActions";
 import catchStore from "../store/Catches";
 import Filter from "./Filter";
+import LocationActions from "../actions/LocationActions";
+import FishermanActions from "../actions/FishermanActions";
 
 
 class CatchList extends React.Component {
@@ -23,6 +25,8 @@ class CatchList extends React.Component {
 
     componentDidMount() {
         catchStore.addChangeListener(this.onChangeOfCatches);
+        LocationActions.getLocations();
+        FishermanActions.getAllFisherman();
         CatchActions.getCatch(this.state.filter);
     }
 
@@ -49,8 +53,8 @@ class CatchList extends React.Component {
                         this.state.catches.map((item) =>{
                             return (
                             <tr id={item.id}>
-                                <td>{item.fisherman}</td>
-                                <td>{item.location}</td>
+                                <td>{item.fisherman.fistName}</td>
+                                <td>{item.location.name}</td>
                                 <td>{item.timestamp}</td>
                                 <td>{item.species}</td>
                                 <td>{item.weight} g</td>

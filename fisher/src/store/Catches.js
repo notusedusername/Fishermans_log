@@ -1,6 +1,7 @@
 import EventEmitter from 'events';
 import dispatcher from "../dispatchers/Dispatcher";
-
+import fishermanStore from "./FishermanStore";
+import locationStore from "./Locations";
 const axios = require('axios');
 
 class CatchStore extends EventEmitter{
@@ -21,7 +22,6 @@ class CatchStore extends EventEmitter{
 
 }
 
-const catchStore = new CatchStore();
 
 dispatcher.register((action) => {
 
@@ -47,8 +47,22 @@ dispatcher.register((action) => {
         let params = action.command.params;
         axios.get('http://localhost:3001/catches' + queryParams(params))
             .then((res) => {
-                console.log(res);
-                Object.assign(catchStore._catches, res.data);
+                console.log(res.data);
+                var result = [];
+                res.data.forEach((value, index) => {
+                   var fisherman = fishermanStore._fishermans.filter((item) => item.id === value.fisherman);
+                   var location = locationStore._locations.filter((item) => item.id === value.location);
+                   result.push({
+                       id: value.id,
+                       fisherman: fisherman[0],
+                       location: location[0],
+                       timestamp: value.timestamp,
+                       weight: value.weight,
+                       species: value.weight
+                   })
+                });
+                console.log(result);
+                catchStore._catches = result;
                 catchStore.emitChange();
             })
             .catch((err) => {
@@ -59,6 +73,7 @@ dispatcher.register((action) => {
 
 });
 
+const catchStore = new CatchStore();
 export default catchStore;
 
 
