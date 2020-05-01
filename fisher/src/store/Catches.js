@@ -45,7 +45,7 @@ dispatcher.register((action) => {
     }
     else if(action.command.commandType === 'GET_CATCH'){
         let params = action.command.params;
-        axios.get('http://localhost:3001/catches')
+        axios.get('http://localhost:3001/catches' + queryParams(params))
             .then((res) => {
                 console.log(res);
                 Object.assign(catchStore._catches, res.data);
@@ -60,3 +60,18 @@ dispatcher.register((action) => {
 });
 
 export default catchStore;
+
+
+var queryParams = (params) => {
+    if(params){
+        var fisherman = params.id ? 'fisherman=' + params.id : '';
+        var location = params.location ? 'location=' + params.location : '';
+        var weight = params.weight ? 'weight=' + params.weight : '';
+        var species = params.species ? 'species=' + params.species : '';
+        var toReturn = fisherman + location + weight + species;
+        return toReturn ? '?' + toReturn : '';
+    }
+    else {
+        return ''
+    }
+};

@@ -1,9 +1,8 @@
 import EventEmitter from 'events';
 
 
-class ProfileStore extends EventEmitter{
-    _profile = {};
-    _equipment = [];
+class EquipmentStore extends EventEmitter{
+    _equipment_items = [];
 
     emitChange(){
         this.emit('change')
@@ -20,5 +19,5 @@ class ProfileStore extends EventEmitter{
 
 }
 
-const profile = new ProfileStore();
-export default profile;
+const equipmentStore = new EquipmentStore();
+export default equipmentStore;

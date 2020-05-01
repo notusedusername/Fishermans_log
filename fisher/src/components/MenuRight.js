@@ -2,13 +2,17 @@ import React from "react";
 import {Nav, NavDropdown} from "react-bootstrap";
 import ProfileActions from "../actions/ProfileActions";
 import profile from "../store/ProfileStore";
+import constants from "../Constants";
 
 class MenuRight extends React.Component{
     constructor(props, context) {
         super(props, context);
         this.state={
-            id: 666, //The id of the demo playa
-            profile: {}
+            id: constants.default_demo_profile_id,
+            profile: {
+                firstName: 'Loading...',
+                lastName: ''
+            }
         };
         this.onChangeOfProfile = this.onChangeOfProfile.bind(this);
     }
@@ -20,7 +24,7 @@ class MenuRight extends React.Component{
 
     componentDidMount() {
         profile.addChangeListener(this.onChangeOfProfile);
-        ProfileActions.getProfile(this.state);
+        ProfileActions.getPersonal(this.state);
     }
 
     componentWillUnmount() {

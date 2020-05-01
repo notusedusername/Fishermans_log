@@ -32,9 +32,9 @@ class CatchList extends React.Component {
 
     render() {
         return (
-            <div>
+            <div id={"catches"}>
                 <Filter/>
-                <table className={"table table-bordered table-striped"}>
+                <table  className={"table table-light table-bordered table-striped"}>
                     <thead>
                     <tr>
                         <th>Fisherman</th>
