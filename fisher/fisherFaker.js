@@ -19,6 +19,7 @@ for(let i = 1; i <= 100; i++){
     fishermans.push(generateFisherman(i));
 }
 
+fishermans.push({id: 666, firstName: "Demo", lastName: "János", country: "Magyarország", city: "Bivalybasznád", address: "Csülök utca 31", email: "xXPussyDestroyerXx@freemail.com", telephone: "0640505050"});
 
 generateLocation = (id) => {
     locationTypes = ['Lake', 'River', 'Sea'];
@@ -74,7 +75,6 @@ for(let i = 1; i < 400; i ++){
     fisherEquipment.push(generateFisherEquipment(i));
 }
 
-var user = {id: ''};
 
 fs.writeFile('database.fake.json',
     JSON.stringify({
@@ -82,7 +82,6 @@ fs.writeFile('database.fake.json',
         locations: locations,
         catches: catches,
         fisher_equipment: fisherEquipment,
-        equipment: equipment,
-        user: user
+        equipment: equipment
     }), (err) => {});
 

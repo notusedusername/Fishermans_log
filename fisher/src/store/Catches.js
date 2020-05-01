@@ -54,7 +54,7 @@ dispatcher.register((action) => {
             .catch((err) => {
                 console.log(err);
             });
-        catchStore.emitChange();
+
     }
 
 });
