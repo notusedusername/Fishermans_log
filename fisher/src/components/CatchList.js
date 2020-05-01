@@ -4,6 +4,7 @@ import catchStore from "../store/Catches";
 import Filter from "./Filter";
 import LocationActions from "../actions/LocationActions";
 import FishermanActions from "../actions/FishermanActions";
+import {Accordion, Button, Card, Table} from "react-bootstrap";
 
 
 class CatchList extends React.Component {
@@ -53,8 +54,62 @@ class CatchList extends React.Component {
                         this.state.catches.map((item) =>{
                             return (
                             <tr id={item.id}>
-                                <td>{item.fisherman.fistName}</td>
-                                <td>{item.location.name}</td>
+                                <td>
+                                    <Accordion>
+                                        <Card>
+                                            <Card.Header>
+                                                <Accordion.Toggle as={Button} variant={"link"} eventKey="0">
+                                                    {item.fisherman.firstName} {item.fisherman.lastName}
+                                                </Accordion.Toggle>
+                                            </Card.Header>
+                                            <Accordion.Collapse eventKey="0">
+                                                <Card.Body>
+                                                    <Table responsive>
+                                                        <tr>
+                                                            <td>Country</td>
+                                                            <td>{item.fisherman.country}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>City</td>
+                                                            <td>{item.fisherman.city}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Address</td>
+                                                            <td>{item.fisherman.address}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Country</td>
+                                                            <td>{item.fisherman.email}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Country</td>
+                                                            <td>{item.fisherman.telephone}</td>
+                                                        </tr>
+                                                    </Table>
+                                                </Card.Body>
+                                            </Accordion.Collapse>
+                                        </Card>
+                                    </Accordion>
+                                </td>
+                                <td><Accordion>
+                                    <Card>
+                                        <Card.Header>
+                                            <Accordion.Toggle as={Button} variant={"link"} eventKey="0">
+                                                {item.location.name}
+                                            </Accordion.Toggle>
+                                        </Card.Header>
+                                        <Accordion.Collapse eventKey="0">
+                                            <Card.Body>
+                                                <Table responsive>
+                                                    <tr>
+                                                        <td>Coordinates</td>
+                                                        <td>{item.location.coordinates}</td>
+                                                    </tr>
+                                                </Table>
+                                            </Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                </Accordion></td>
                                 <td>{item.timestamp}</td>
                                 <td>{item.species}</td>
                                 <td>{item.weight} g</td>

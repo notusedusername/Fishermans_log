@@ -56,7 +56,7 @@ dispatcher.register((action) => {
                        id: value.id,
                        fisherman: fisherman[0],
                        location: location[0],
-                       timestamp: value.timestamp,
+                       timestamp: value.timestamp.replace('T', ' ').substring(0, value.timestamp.length - 8),
                        weight: value.weight,
                        species: value.weight
                    })

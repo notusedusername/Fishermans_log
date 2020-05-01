@@ -79,9 +79,7 @@ class Profile extends React.Component {
                   <Card.Body>
                       <Card.Title>Equipment</Card.Title>
                       <Card.Text>
-                          <Accordion>
                               <EquipmentItem/>
-                          </Accordion>
                       </Card.Text>
                   </Card.Body>
               </Card>

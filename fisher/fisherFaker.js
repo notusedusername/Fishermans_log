@@ -4,7 +4,7 @@ const fs = require('fs');
 generateFisherman = (id) => {
   return {
       id: id,
-      fistName : faker.name.firstName(),
+      firstName : faker.name.firstName(),
       lastName: faker.name.lastName(),
       country: faker.address.country(),
       city: faker.address.city(),
