@@ -16,10 +16,9 @@ dispatcher.register((action) => {
     if(action.command.commandType === 'GET_ALL_FISHER'){
         axios.get('http://localhost:3001/fishermen')
             .then((res) => {
-                console.log(res.data);
                 fishermanStore._fishermen = res.data;
+                console.log("Fishermen loaded");
                 fishermanStore.emitChange();
-
             })
             .catch((err) => {
                 console.log(err);

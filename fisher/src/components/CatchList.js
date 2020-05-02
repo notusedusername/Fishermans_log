@@ -5,6 +5,8 @@ import Filter from "./Filter";
 import LocationActions from "../actions/LocationActions";
 import FishermanActions from "../actions/FishermanActions";
 import {Accordion, Button, Card, Table} from "react-bootstrap";
+import fishermanStore from "../store/FishermanStore";
+import locationStore from "../store/Locations";
 
 
 class CatchList extends React.Component {
@@ -12,19 +14,13 @@ class CatchList extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            catches: [{
-                    fisherman: {
-                        firstName: '',
-                        lastName: ''
-                    },
-                    location: {
-                        name: ''
-                    },
-                }
-            ]
+            catches: [],
+            locations: false,
+            fishermen: false
         };
         this.onChangeOfCatches = this.onChangeOfCatches.bind(this);
-
+        this.onChangeOfFishermen = this.onChangeOfFishermen.bind(this);
+        this.onChangeOfLocations = this.onChangeOfLocations.bind(this);
     }
 
     onChangeOfCatches(){
@@ -33,15 +29,41 @@ class CatchList extends React.Component {
         });
     }
 
+    onChangeOfFishermen(){
+        console.log("pecások betoltve");
+        this.setState({
+            fishermen: true
+        });
+        console.log(fishermanStore._fishermen);
+        if(this.state.locations){
+            CatchActions.getCatch(this.state);
+        }
+    }
+
+    onChangeOfLocations(){
+        console.log("helyek betoltve");
+        this.setState({
+            locations: true
+        });
+        console.log(locationStore._locations);
+        if(this.state.fishermen){
+            CatchActions.getCatch(this.state);
+        }
+    }
+
     componentDidMount() {
         catchStore.addChangeListener(this.onChangeOfCatches);
+        fishermanStore.addChangeListener(this.onChangeOfFishermen);
+        locationStore.addChangeListener(this.onChangeOfLocations);
+
         LocationActions.getLocations();
         FishermanActions.getAllFisherman();
-        CatchActions.getCatch(this.state.filter);
     }
 
     componentWillUnmount() {
         catchStore.removeChangeListener(this.onChangeOfCatches);
+        locationStore.removeChangeListener(this.onChangeOfLocations);
+        fishermanStore.removeChangeListener(this.onChangeOfFishermen);
     }
 
 
@@ -49,6 +71,7 @@ class CatchList extends React.Component {
 
         let tableContent;
         if(this.state.catches.length > 0 ){
+            console.log(this.state.catches);
             tableContent = this.state.catches.map((item) =>{
                 return (
                     <tr id={item.id}>

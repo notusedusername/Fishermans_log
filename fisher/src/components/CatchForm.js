@@ -3,6 +3,8 @@ import CatchActions from "../actions/CatchActions";
 import LocationActions from "../actions/LocationActions";
 import LocationSelect from "./LocationSelect";
 import constants from "../Constants";
+import filter from "../store/RageAgainstReact";
+import MessageActions from "../actions/MessageActions";
 
 
 class CatchForm extends React.Component {
@@ -21,15 +23,46 @@ class CatchForm extends React.Component {
         LocationActions.getLocations();
     }
 
+    handleSubmit = (event) => {
+        event.preventDefault();
+
+        if(this.validateForm()){
+            this.setState({
+                location: filter.location
+            });
+            CatchActions.postCatch(this.state);
+            this.clearForm();
+        }
+        else {
+            MessageActions.toggleMessage({
+                show: true,
+                text: 'Please fill all fields!'
+            })
+
+        }
+        this.setState({
+           location: filter.location
+        });
+    };
+
+    validateForm = () => {
+      return this.state.weight && this.state.species;
+    };
+
+    clearForm = () => {
+        this.setState({
+            species: '',
+            weight: ''
+        });
+    };
+
     render() {
        return(
            <form id={"catchForm"} >
                <h2>Record Catch</h2>
                <div className="form-group">
                    <label htmlFor="location">Location</label>
-                   <LocationSelect onChange={(e)=>{
-                       this.setState({location : e.target.value});
-                   }}/>
+                   <LocationSelect/>
                </div>
                <div className="form-group">
                    <label htmlFor="species">Species</label>
@@ -42,12 +75,12 @@ class CatchForm extends React.Component {
                <div className="form-group">
                    <label htmlFor="weight">Weight</label>
                    <input required type="number" value={this.state.weight} className="form-control" id="weight"
-                          placeholder="Weight of the fish"
+                          placeholder="Weight of the fish in grams"
                           onChange={(e)=>{
-                              this.setState({weight : e.target.value});
+                              this.setState({weight : e.target.value > 0 ? e.target.value : ''});
                           }}/>
                </div>
-               <button style={{width: "100%"}} type="submit" className="btn btn-outline-primary" onClick={() => CatchActions.postCatch(this.state)}>Submit</button>
+               <button style={{width: "100%"}} type="submit" className="btn btn-outline-primary" onClick={(e) => this.handleSubmit(e)}>Submit</button>
            </form>
        );
     }

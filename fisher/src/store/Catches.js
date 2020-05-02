@@ -44,25 +44,26 @@ dispatcher.register((action) => {
     }
     else if(action.command.commandType === 'GET_CATCH'){
         let params = action.command.params;
-        console.log(params);
         axios.get('http://localhost:3001/catches' + queryParams(params))
             .then((res) => {
                 console.log(res.data);
                 var result = [];
                 res.data.forEach((value, index) => {
-                   var fisherman = fishermanStore._fishermen.filter((item) => item.id === value.fisherman);
-                   var location = locationStore._locations.filter((item) => item.id === value.location);
-                   result.push({
-                       id: value.id,
-                       fisherman: fisherman[0],
-                       location: location[0],
-                       timestamp: value.timestamp.replace('T', ' ').substring(0, value.timestamp.length - 8),
-                       weight: value.weight,
-                       species: value.species
-                   })
+                    var fisherman = fishermanStore._fishermen.filter((item) => item.id === value.fisherman);
+                    var location = locationStore._locations.filter((item) => item.id === value.location);
+                    result.push({
+                        id: value.id,
+                        fisherman: fisherman[0],
+                        location: location[0],
+                        timestamp: value.timestamp.replace('T', ' ').substring(0, value.timestamp.length - 8),
+                        weight: value.weight,
+                        species: value.species
+                    });
+
                 });
-                console.log(result);
                 catchStore._catches = result;
+                console.log(result);
+                console.log("Catches loaded");
                 catchStore.emitChange();
             })
             .catch((err) => {

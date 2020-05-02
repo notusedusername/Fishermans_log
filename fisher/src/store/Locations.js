@@ -3,8 +3,6 @@ import EventEmitter from "events";
 
 const axios = require('axios');
 
-let locations = [];
-
 class LocationStore extends EventEmitter{
     _locations = [];
 
@@ -31,8 +29,8 @@ dispatcher.register((action) => {
         axios.get('http://localhost:3001/locations')
             .then((res) => {
                 locationStore._locations = res.data;
+                console.log("Locations loaded");
                 locationStore.emitChange();
-                console.log(res.data);
             })
             .catch((err) => {
                 console.log(err);
