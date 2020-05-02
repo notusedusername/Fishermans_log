@@ -13,7 +13,6 @@ class CatchForm extends React.Component {
         super(props, context);
         this.state={
             fisherman: constants.default_demo_profile_id,
-            location : 1,
             species : '',
             weight : ''
         };
@@ -23,14 +22,15 @@ class CatchForm extends React.Component {
         LocationActions.getLocations();
     }
 
-    handleSubmit = (event) => {
+    handleSubmit(event) {
         event.preventDefault();
-
         if(this.validateForm()){
-            this.setState({
-                location: filter.location
+            CatchActions.postCatch({
+                fisherman: this.state.fisherman,
+                location: filter.location,
+                species: this.state.species,
+                weight: this.state.weight
             });
-            CatchActions.postCatch(this.state);
             this.clearForm();
         }
         else {
@@ -40,17 +40,15 @@ class CatchForm extends React.Component {
             })
 
         }
-        this.setState({
-           location: filter.location
-        });
     };
 
     validateForm = () => {
-      return this.state.weight && this.state.species;
+      return this.state.weight && this.state.species && filter.location && filter.location !== '';
     };
 
     clearForm = () => {
         this.setState({
+            location: '',
             species: '',
             weight: ''
         });

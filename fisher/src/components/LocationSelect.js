@@ -30,7 +30,7 @@ class LocationSelect extends React.Component {
     }
 
     handleChange = (selectedOption) => {
-       filter.location = selectedOption ? selectedOption.value : '';
+        filter.location = selectedOption ? selectedOption.value : '';
     };
 
     render() {

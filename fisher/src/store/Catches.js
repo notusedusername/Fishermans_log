@@ -1,7 +1,9 @@
+import React from "react";
 import EventEmitter from 'events';
 import dispatcher from "../dispatchers/Dispatcher";
 import fishermanStore from "./FishermanStore";
 import locationStore from "./Locations";
+import MessageActions from "../actions/MessageActions";
 const axios = require('axios');
 
 class CatchStore extends EventEmitter{
@@ -35,6 +37,10 @@ dispatcher.register((action) => {
         })
             .then((res) => {
                 console.log(res);
+                MessageActions.toggleMessage({
+                    show: true,
+                    text: `Catch registered!`
+                });
                 catchStore.emitChange();
 
             })
